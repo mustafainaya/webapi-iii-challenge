@@ -7,15 +7,7 @@ const userDb = require('../helpers/userDb');
 const postDb = require('../helpers/postDb');
 
 
-const nameCheck = (req, res, next) => {
-    req.body.name = req.body.name.replace(
-        /\w\S*/g,
-        (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); 
-        }
-    )
-next();
-}
+
 
 router.get('/', async (req, res) => {
     try {
@@ -56,7 +48,7 @@ router.get('/:id/posts', async (req, res) => {
 }
 })
 
-router.post('/', nameCheck, async (req, res) => {
+router.post('/', async (req, res) => {
     const { name } = req.body;
     if (!name) {
         res.status(404).send(`<h2> Names cannot be blank!</h2>`)
@@ -75,7 +67,7 @@ router.post('/', nameCheck, async (req, res) => {
     }
 });
 
-router.put('/:id', nameCheck, async (req, res) => {
+router.put('/:id',  async (req, res) => {
     const { name } = req.body;
     if (!name) {
         res.status(404).send(`<h2> You must enter in a name to update!</h2>`)

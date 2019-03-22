@@ -7,15 +7,6 @@ const userDb = require('../helpers/userDb');
 const postDb = require('../helpers/postDb');
 
 
-const nameCheck = (req, res, next) => {
-    req.body.name = req.body.name.replace(
-        /\w\S*/g,
-        (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); 
-        }
-    )
-next();
-}
 
 router.get('/', async (req, res) => {
     try {
@@ -47,18 +38,18 @@ router.get('/:id/posts', async (req, res) => {
     if (getUserPosts) {
         res.status(200).json(getUserPosts)
     } else {
-        res.status(404).json({message: 'user and/or post does not exist'})
+        res.status(404).json({message: 'user  does not exist'})
     }
     
 } catch (error) {
-    res.status(500).json({error: 'error while retrieving user id'})
+    res.status(500).json({error: 'error with user id'})
 }
 })
 
-router.post('/', nameCheck, async (req, res) => {
+router.post('/',  async (req, res) => {
     const { name } = req.body;
     if (!name) {
-        res.status(404).send(`<h2> Names cannot be blank!</h2>`)
+        res.status(404).send(`<h2> names can't be blank!</h2>`)
     }
 
     try {
@@ -70,14 +61,14 @@ router.post('/', nameCheck, async (req, res) => {
             res.status(201).json(insertUser)
         } 
     } catch (error) {
-        res.status(500).send({error: 'error adding a new user'})
+        res.status(500).send({error: 'error adding '})
     }
 });
 
-router.put('/:id', nameCheck, async (req, res) => {
+router.put('/:id', async (req, res) => {
     const { name } = req.body;
     if (!name) {
-        res.status(404).send(`<h2> You must enter in a name to update!</h2>`)
+        res.status(404).send(`<h2> NAME TO UPDATE</h2>`)
     } 
 
     try {
