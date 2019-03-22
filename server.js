@@ -21,11 +21,5 @@ server.get('/', (req, res) => {
 		SERVER IS UP 
 		`);
 });
-server.post();
-server.get('*', (req, res) => {
-	res.status(404).send(`
-	<h2>The link you searched for does not exist</h2>
-	`);
-});
 
 module.exports = server;
