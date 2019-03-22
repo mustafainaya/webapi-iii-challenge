@@ -1,4 +1,10 @@
 // code away!
+require('dotenv').config();
+
 const server = require('./server');
 
-server.listen(6000, () => console.log('Up And Running'));
+const port = process.env.PORT || 6000;
+
+server.listen(port, () => {
+	console.log(`Server is listening on ${port}`);
+});
